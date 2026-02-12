@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -15,14 +15,22 @@ export default function Navbar() {
   };
 
   const baseLink =
-    "relative px-4 py-2 rounded-md text-sm transition text-neutral-400 hover:text-white";
+    "relative px-4 py-2 rounded-md text-sm transition duration-300 text-neutral-400 hover:text-green-700 hover:drop-shadow-[0_0_6px_#22c55e]";
 
   return (
     <nav className="border-b border-neutral-800 relative">
       <div className="w-full px-6 py-4 flex justify-between items-center">
         {/* LOGO */}
-        <Link href="/" className="font-bold tracking-tight">
-          Full stack developer and cybersecutity student
+        <Link href="/" className="flex flex-col leading-tight">
+          <span className="text-xl font-mono">
+            <span className="text-green-700">&lt;</span>
+            Moha<span className="text-green-700">mm</span>ad
+            <span className="text-green-700"> /&gt;</span>
+          </span>
+
+          <span className="text-sm text-green-700 font-mono">
+            Fullstack developer and cyber security student
+          </span>
         </Link>
 
         {/* DESKTOP */}
@@ -44,7 +52,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 4 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute left-3 right-3 -bottom-1 h-[2px] bg-white rounded-full"
+                    className="absolute left-3 right-3 -bottom-1 h-[2px] bg-green-700 rounded-full shadow-[0_0_6px_#22c55e]"
                   />
                 )}
               </AnimatePresence>
@@ -82,9 +90,7 @@ export default function Navbar() {
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className={`${baseLink} block ${
-                  isActive(item.href)
-                    ? "text-white"
-                    : "hover:bg-neutral-900"
+                  isActive(item.href) ? "text-white" : "hover:bg-neutral-900"
                 }`}
               >
                 {item.label}

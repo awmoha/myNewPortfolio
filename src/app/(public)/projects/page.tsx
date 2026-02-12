@@ -16,8 +16,9 @@ type Project = {
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [activeCategory, setActiveCategory] =
-    useState<"all" | "web" | "security">("all");
+  const [activeCategory, setActiveCategory] = useState<
+    "all" | "web" | "security"
+  >("all");
 
   useEffect(() => {
     const loadProjects = async () => {
@@ -39,7 +40,7 @@ export default function ProjectsPage() {
 
   return (
     <main className="px-6 py-12 max-w-7xl mx-auto">
-      <h1 className="text-6xl font-bold mb-8">Projects</h1>
+      <h1 className="text-5xl font-bold tracking-tight mb-6">Projects</h1>
 
       {/* FILTER BUTTONS */}
       <div className="flex gap-4 mb-10">
@@ -47,7 +48,7 @@ export default function ProjectsPage() {
           onClick={() => setActiveCategory("all")}
           className={`px-4 py-2 rounded border ${
             activeCategory === "all"
-              ? "bg-neutral-900 text-white"
+              ? "bg-neutral-900 text-green-700 "
               : "border-neutral-800 text-neutral-400"
           }`}
         >
@@ -58,7 +59,7 @@ export default function ProjectsPage() {
           onClick={() => setActiveCategory("web")}
           className={`px-4 py-2 rounded border ${
             activeCategory === "web"
-              ? "bg-neutral-900 text-white"
+              ? "bg-neutral-900 text-green-700 "
               : "border-neutral-800 text-neutral-400"
           }`}
         >
@@ -69,7 +70,7 @@ export default function ProjectsPage() {
           onClick={() => setActiveCategory("security")}
           className={`px-4 py-2 rounded border ${
             activeCategory === "security"
-              ? "bg-neutral-900 text-white"
+              ? "bg-neutral-900 text-green-700 "
               : "border-neutral-800 text-neutral-400"
           }`}
         >
@@ -96,10 +97,8 @@ export default function ProjectsPage() {
             )}
 
             <div className="p-4">
-              <h2 className="font-semibold text-lg">{p.title}</h2>
-              <p className="text-sm text-neutral-400 mt-2">
-                {p.description}
-              </p>
+              <h2 className="font-semibold text-lg ">{p.title}</h2>
+              <p className="text-sm text-neutral-400 mt-2">{p.description}</p>
 
               {p.tech && (
                 <ul className="mt-3 flex flex-wrap gap-2">

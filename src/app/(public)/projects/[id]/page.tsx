@@ -18,6 +18,7 @@ type Project = {
   tech: string[] | null;
 };
 
+
 export default function ProjectDetailPage() {
   const params = useParams<{ id: string }>();
 
@@ -52,6 +53,9 @@ export default function ProjectDetailPage() {
 
   if (loading || !project) return null;
 
+const displayImages = project.images
+  ? [...project.images].reverse()
+  : [];
   return (
     <main className="px-6 py-12 max-w-7xl mx-auto">
       {/* HEADER */}
@@ -106,7 +110,7 @@ export default function ProjectDetailPage() {
       )} */}
       {project.images && project.images.length > 0 && (
         <section className="grid grid-cols-2 sm:grid-cols-3 gap-6 mb-12">
-    {[...project.images].reverse().map((img: string, i: number) => (
+{displayImages.map((img: string, i: number) => (
             <button
               key={i}
               onClick={() => {
@@ -153,7 +157,7 @@ export default function ProjectDetailPage() {
           open={open}
           close={() => setOpen(false)}
           index={index}
-          slides={project.images.map((src) => ({ src }))}
+slides={displayImages.map((src) => ({ src }))}
         />
       )}
     </main>

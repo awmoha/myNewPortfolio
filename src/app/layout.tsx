@@ -14,8 +14,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+
+
 export const metadata = {
-  title: "Moha – Cybersecurity & Digital Forensics Portfolio",
+  title: "Moha – Fullstack Developer & Cybersecurity",
   description:
     "Cybersecurity and Digital Forensics student based in Sweden. Focused on secure systems, forensic tools, and modern web applications.",
 
@@ -46,23 +48,21 @@ export const metadata = {
   // },
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-      <html lang="en">
+    <html lang="en">
       <body
         className={`
-          ${geistSans.variable}
-          ${geistMono.variable}
-          antialiased
-          min-h-screen
-          flex
-          flex-col
-        `}
+    ${geistSans.className}
+    antialiased
+    min-h-screen
+    flex
+    flex-col
+  `}
       >
         <Navbar />
         <main className="flex-1">{children}</main>
