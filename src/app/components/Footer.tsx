@@ -28,7 +28,7 @@ export default function Footer() {
           </motion.a>
 
           <motion.a
-            href="mailto:mohammad.awad0110@gmail.com@gmail.com"
+            href="mailto:mohammad.awad0110@gmail.com"
             whileHover={{ y: -2 }}
             className="hover:text-white"
           >
