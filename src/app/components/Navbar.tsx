@@ -24,7 +24,7 @@ export default function Navbar() {
         <Link href="/" className="flex flex-col leading-tight">
           <span className="text-xl font-mono">
             <span className="text-green-700">&lt;</span>
-            Mohaaa<span className="text-green-700">mm</span>ad
+            Moha<span className="text-green-700">mm</span>ad
             <span className="text-green-700"> /&gt;</span>
           </span>
 
