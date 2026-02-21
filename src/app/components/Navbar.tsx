@@ -18,8 +18,7 @@ export default function Navbar() {
     "relative px-4 py-2 rounded-md text-sm transition duration-300 text-neutral-400 hover:text-green-700 hover:drop-shadow-[0_0_6px_#22c55e]";
 
   return (
-    <nav className="border-b border-neutral-800 relative">
-      <div className="w-full px-6 py-4 flex justify-between items-center">
+<nav className="sticky top-0 z-50 bg-black border-b border-neutral-800">      <div className="w-full px-6 py-4 flex justify-between items-center">
         {/* LOGO */}
         <Link href="/" className="flex flex-col leading-tight">
           <span className="text-xl font-mono">
