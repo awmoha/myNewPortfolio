@@ -10,12 +10,20 @@ export default function ContactPage() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
-
+  const [emailError, setEmailError] = useState("");
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    setEmailError("");
+
     if (!name.trim() || !email.trim() || !message.trim()) {
-      alert("Please fill in all fields");
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      setEmailError("Please enter a valid email address");
       return;
     }
 
@@ -29,15 +37,15 @@ export default function ContactPage() {
 
     setLoading(false);
 
-    if (error) {
-      alert("Something went wrong");
-      return;
-    }
+    if (error) return;
 
     setSent(true);
     setName("");
     setEmail("");
     setMessage("");
+    setTimeout(() => {
+      setSent(false);
+    }, 3000);
   };
 
   return (
@@ -65,12 +73,17 @@ export default function ContactPage() {
                 />
 
                 <input
-                  className="w-full bg-black border border-neutral-800 p-2 rounded"
+                  className={`w-full bg-black border p-2 rounded ${
+                    emailError ? "border-red-500" : "border-neutral-800"
+                  }`}
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
+                {emailError && (
+                  <p className="text-red-500 text-sm mt-1">{emailError}</p>
+                )}
 
                 <textarea
                   className="w-full bg-black border border-neutral-800 p-2 rounded"
@@ -112,20 +125,19 @@ export default function ContactPage() {
             )}
           </AnimatePresence>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-          className="flex justify-end"
-        >
-          <img
-            src="/contact.png" // lägg bild i public-mappen
-            alt="Cybersecurity illustration"
-            className="w-full max-w-md rounded-xl"
-          />
-        </motion.div>
-                </div>
-
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+            className="flex justify-end"
+          >
+            <img
+              src="/contact.png" // lägg bild i public-mappen
+              alt="Cybersecurity illustration"
+              className="w-full max-w-md rounded-xl"
+            />
+          </motion.div>
+        </div>
       </div>
     </main>
   );

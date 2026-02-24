@@ -43,7 +43,7 @@ export default function AdminPage() {
 
   const [files, setFiles] = useState<FileList | null>(null);
   const [loading, setLoading] = useState(false);
-
+  const unreadCount = messages.filter((m) => !m.read).length;
   // edit state
   const [editingProject, setEditingProject] = useState<Project | null>(null);
 
@@ -106,11 +106,11 @@ export default function AdminPage() {
 
     if (data) setMessages(data);
   };
-  useEffect(() => {
-    if (session && activeView === "messages") {
-      loadMessages();
-    }
-  }, [session, activeView]);
+useEffect(() => {
+  if (session) {
+    loadMessages();
+  }
+}, [session]);
 
   const handleDeleteMessage = async (id: string) => {
     if (!confirm("Delete this message?")) return;
@@ -287,7 +287,7 @@ export default function AdminPage() {
           Logga ut
         </button>
       </div>
-      <nav className="flex gap-4 mb-8">
+      {/* <nav className="flex gap-4 mb-8">
         <button onClick={() => setActiveView("projects")} className="underline">
           Projects
         </button>
@@ -297,8 +297,47 @@ export default function AdminPage() {
         <button onClick={() => setActiveView("messages")} className="underline">
           Messages
         </button>
-      </nav>
+      </nav> */}
 
+      <nav className="flex gap-6 mb-8 border-b border-neutral-800 pb-3">
+        <button
+          onClick={() => setActiveView("projects")}
+          className={`relative px-3 py-2 text-sm transition ${
+            activeView === "projects"
+              ? "text-white border-b-2 border-white"
+              : "text-neutral-400 hover:text-white"
+          }`}
+        >
+          Projects
+        </button>
+
+        <button
+          onClick={() => setActiveView("add")}
+          className={`relative px-3 py-2 text-sm transition ${
+            activeView === "add"
+              ? "text-white border-b-2 border-white"
+              : "text-neutral-400 hover:text-white"
+          }`}
+        >
+          Add project
+        </button>
+
+        <button
+          onClick={() => setActiveView("messages")}
+          className={`relative px-3 py-2 text-sm transition ${
+            activeView === "messages"
+              ? "text-white border-b-2 border-white"
+              : "text-neutral-400 hover:text-white"
+          }`}
+        >
+          Messages
+          {unreadCount > 0 && (
+            <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
+              {unreadCount}
+            </span>
+          )}
+        </button>
+      </nav>
       {/* CREATE / EDIT */}
       {activeView === "add" && (
         <form onSubmit={handleSubmit} className="space-y-4 mb-10">
